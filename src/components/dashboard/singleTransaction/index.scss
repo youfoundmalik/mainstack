@@ -1,0 +1,42 @@
+.single-transaction {
+  .details {
+    .desc-status {
+      h4 {
+        color: var(--black-black-300, #131316);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+      }
+      p {
+        color: var(--gray-gray-400, #56616b);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+      }
+    }
+  }
+  .amount-date {
+    h4 {
+      color: var(--black-black-300, #131316);
+      text-align: right;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%;
+      letter-spacing: -0.4px;
+    }
+    p {
+      color: var(--gray-gray-400, #56616b);
+      text-align: right;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 16px;
+      letter-spacing: -0.2px;
+    }
+  }
+}
