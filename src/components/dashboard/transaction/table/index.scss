@@ -1,0 +1,91 @@
+.transactions-breakdown {
+  .table-head {
+    .table-heading {
+      h3 {
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 32px;
+        letter-spacing: -0.6px;
+      }
+      p {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 16px;
+        letter-spacing: -0.2px;
+      }
+    }
+    .table-actions {
+      .filter-btn {
+        .indicator {
+          display: flex;
+          width: 20px;
+          height: 20px;
+          justify-content: center;
+          align-items: center;
+          border-radius: 100px;
+          background: var(--black-black-300, #131316);
+          color: var(--trashed-colors-white-100, var(--white-white-100, #fff));
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 12px; /* 100% */
+          letter-spacing: -0.4px;
+        }
+      }
+    }
+  }
+}
+
+.single-transaction {
+  .details {
+    .desc-status {
+      h4 {
+        color: var(--black-black-300, #131316);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.2px;
+      }
+      p {
+        color: var(--gray-gray-400, #56616b);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+      }
+      .successful {
+        color: #0ea163;
+      }
+      .pending {
+        color: #a77a07;
+      }
+      .failed {
+        color: #961100;
+      }
+    }
+  }
+  .amount-date {
+    h4 {
+      color: var(--black-black-300, #131316);
+      text-align: right;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%;
+      letter-spacing: -0.4px;
+    }
+    p {
+      color: var(--gray-gray-400, #56616b);
+      text-align: right;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 16px;
+      letter-spacing: -0.2px;
+    }
+  }
+}
