@@ -1,41 +1,61 @@
 import './index.scss';
-import { useDisclosure } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
 
-import TransactionFilter from 'components/dashboard/transactionFilter';
+import { useFetchTransactions } from 'hooks/useFetchTransactions';
 import SummaryBalance from 'components/dashboard/balanceSummary';
 import DashboardLayout from 'components/layout/dashboardLayout';
+import Transactions from 'components/dashboard/transaction';
+import { useFetchWallet } from 'hooks/useFetchWallet';
 import AppButton from 'components/shared/button';
-import TransactionTable from 'components/dashboard/table';
+import { RootState } from 'store/store';
 
 const RevenuePage = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  // const btnRef = useRef()
+  const walletLoading = useFetchWallet();
+  const txnLoading = useFetchTransactions();
+
+  const wallet = useSelector((state: RootState) => state.wallet);
+
   return (
     <DashboardLayout className='revenue-page flex flex-col gap-[100px]'>
-      <div className='revenue-summary'>
-        <div className='graph-and-balance'>
-          <div className='balance-summary flex flex-col items-start gap-2'>
-            <p className='text-grey text-sm font-medium'>Available Balance</p>
-            <div className='summary-balance flex  items-center gap-[65px]'>
-              <h3 className='text-[28px] font-bold text-black'>
-                USD 120,500.00
-              </h3>
-              <AppButton h='50px' colorScheme='blackAlpha' bg='#131316'>
-                Withdraw
-              </AppButton>
+      {walletLoading ? (
+        <></>
+      ) : (
+        <div className='revenue-summary'>
+          <div className='graph-and-balance'>
+            <div className='balance-summary flex flex-col items-start gap-2'>
+              <p className='text-grey text-sm font-medium'>Available Balance</p>
+              <div className='summary-balance flex  items-center gap-[65px]'>
+                <h3 className='text-[28px] font-bold text-black'>
+                  USD {wallet.data.balance}
+                </h3>
+                <AppButton h='50px' colorScheme='blackAlpha' bg='#131316'>
+                  Withdraw
+                </AppButton>
+              </div>
             </div>
+            <div className='graph-area'>graph</div>
           </div>
-          <div className='graph-area'>graph</div>
+          <div className='other-summaries flex flex-col gap-[32px]'>
+            <SummaryBalance
+              title='Ledger Balance'
+              figure={wallet.data.ledger_balance}
+            />
+            <SummaryBalance
+              title='Total Payout'
+              figure={wallet.data.total_payout}
+            />
+            <SummaryBalance
+              title='Total Revenue'
+              figure={wallet.data.total_revenue}
+            />
+            <SummaryBalance
+              title='Pending Payout'
+              figure={wallet.data.pending_payout}
+            />
+          </div>
         </div>
-        <div className='other-summaries flex flex-col gap-[32px]'>
-          <SummaryBalance title='Ledger Balance' figure='120,500.00' />
-          <SummaryBalance title='Total Payout' figure='120,500.00' />
-          <SummaryBalance title='Total Revenue' figure='120,500.00' />
-          <SummaryBalance title='Pending Payout' figure='120,500.00' />
-        </div>
-      </div>
-      <TransactionFilter isOpen={isOpen} onClose={onClose} />
-      <TransactionTable onOpen={onOpen} />
+      )}
+      {txnLoading ? <></> : <Transactions />}
     </DashboardLayout>
   );
 };

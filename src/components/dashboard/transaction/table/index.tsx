@@ -1,13 +1,17 @@
 import './index.scss';
-import { Button, ButtonGroup, Divider, IconButton } from '@chakra-ui/react';
 import { AiOutlineDownload } from 'react-icons/ai';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
-import SingleTransaction from '../singleTransaction';
+import { Button, ButtonGroup, Divider, IconButton } from '@chakra-ui/react';
+
+import SingleTransaction from './TableRow';
+import { Transaction } from 'models/transaction';
 
 interface Props {
   onOpen: () => void;
+  data: Transaction[];
+  count: number;
 }
-const TransactionTable = ({ onOpen }: Props) => {
+const TransactionTable = ({ onOpen, data, count }: Props) => {
   return (
     <div className='transactions-breakdown flex flex-col w-full gap-5'>
       <div className='table-head flex items-center justify-between w-full'>
@@ -22,7 +26,7 @@ const TransactionTable = ({ onOpen }: Props) => {
             className='flex items-center gap-1 filter-btn'
           >
             <span>Filter</span>
-            <span className='indicator'>3</span>
+            {count > 0 ? <span className='indicator'>{count}</span> : null}
           </Button>
           <ButtonGroup isAttached variant='outline'>
             <Button borderRadius='50px'>Save</Button>
@@ -37,9 +41,9 @@ const TransactionTable = ({ onOpen }: Props) => {
       </div>
       <Divider />
       <div className='table-body mt-3 flex flex-col w-full gap-6'>
-        <SingleTransaction />
-        <SingleTransaction />
-        <SingleTransaction />
+        {data.map((txn, i) => (
+          <SingleTransaction data={txn} key={i} />
+        ))}
       </div>
     </div>
   );

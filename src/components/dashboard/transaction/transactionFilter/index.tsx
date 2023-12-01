@@ -15,21 +15,27 @@ import AppSelect from 'components/shared/select';
 import AppButton from 'components/shared/button';
 import DateRange from './DateRange';
 import QuickDate from './QuickDate';
+import { Transaction } from 'models/transaction';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  allTransactions: Transaction[];
+  setTransactions: (txn: Transaction[], count: number) => void;
 }
 
 interface Filters {
-  type?: string[];
-  status?: string[];
-  startDate?: string;
-  endDate?: string;
+  type: string[];
+  status: string[];
 }
 
-const TransactionFilter = ({ isOpen, onClose }: Props) => {
-  const [filter, setFilter] = useState({ status: [], type: [] });
+const TransactionFilter = ({
+  isOpen,
+  onClose,
+  allTransactions,
+  setTransactions,
+}: Props) => {
+  const [filter, setFilter] = useState<Filters>({ status: [], type: [] });
   const [date, setDate] = useState({ startDate: '', endDate: '' });
 
   const handleSelect = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,16 +59,33 @@ const TransactionFilter = ({ isOpen, onClose }: Props) => {
   const handleClear = () => {
     setFilter({ status: [], type: [] });
     setDate({ startDate: '', endDate: '' });
+    setTransactions(allTransactions, 0);
   };
 
   const handleApply = () => {
-    const filters: Filters = {};
-    filter.status.length > 0 ? (filters.status = filter.status) : null;
-    filter.type.length > 0 ? (filters.type = filter.type) : null;
-    date.startDate.length > 0 ? (filters.startDate = date.startDate) : null;
-    date.endDate.length > 0 ? (filters.endDate = date.endDate) : null;
+    let count = 0;
+    let txn = allTransactions;
 
-    alert(JSON.stringify(filters));
+    if (filter.status.length > 0) {
+      count = count + 1;
+      txn = txn.filter((item) => filter.status.includes(item.status));
+    }
+    if (filter.type.length > 0) {
+      count = count + 1;
+      txn = txn.filter((item) => filter.type.includes(item.type));
+    }
+    if (date.startDate.length > 0 || date.endDate.length > 0) {
+      if (date.startDate.length > 0) {
+        txn = txn.filter((item) => item.date >= date.startDate);
+      }
+      if (date.endDate.length > 0) {
+        txn = txn.filter((item) => item.date <= date.endDate);
+      }
+      count = count + 1;
+    }
+
+    setTransactions(txn, count);
+    onClose();
   };
 
   return (
@@ -134,9 +157,9 @@ export default TransactionFilter;
 
 const statusOptions = ['successful', 'pending', 'failed'];
 const typeOptions = [
-  'store transactions',
+  'store transaction',
   'get tipped',
-  'withdrawals',
-  'chargebacks',
-  'cashbacks',
+  'withdrawal',
+  'chargeback',
+  'cashback',
 ];

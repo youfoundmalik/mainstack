@@ -17,7 +17,6 @@ const DateRange = ({ date, onChange }: Props) => {
         className='custom-select-date basis-1/2'
         ref={startDateRef}
         value={date.startDate}
-        min={today.toISOString().split('T')[0]}
         onChange={(e) => {
           onChange(e);
           endDateRef.current?.showPicker();
