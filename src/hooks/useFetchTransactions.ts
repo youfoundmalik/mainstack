@@ -9,14 +9,11 @@ import { transactionsActions } from 'store/reducers/transactions';
 export const useFetchTransactions = () => {
   const dispatch = useDispatch();
   const { isLoading } = useQuery({
-    queryFn: () => {
-      return GeneralService.getTransactions();
-    },
+    queryFn: GeneralService.getTransactions,
     queryKey: ['transactions'],
     onSuccess: (data) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      const res = data.map((r: Transaction) => new TransactionData(r));
+      const response = data as Transaction[];
+      const res = response.map((r: Transaction) => new TransactionData(r));
       dispatch(transactionsActions.push(res));
     },
     ...sharedQueriesProps,

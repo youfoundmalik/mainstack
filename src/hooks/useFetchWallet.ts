@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
 
-import { WalletData } from 'models/wallet';
+import { Wallet, WalletData } from 'models/wallet';
 import { sharedQueriesProps } from 'utils/apis';
 import { GeneralService } from '../services/general';
 import { walletActions } from 'store/reducers/wallet';
@@ -14,9 +14,8 @@ export const useFetchWallet = () => {
     },
     queryKey: ['wallet'],
     onSuccess: (data) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      const res = new WalletData(data);
+      const response = data as Wallet;
+      const res = new WalletData(response);
       dispatch(walletActions.push(res));
     },
     ...sharedQueriesProps,

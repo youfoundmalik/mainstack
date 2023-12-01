@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { GeneralService } from '../services/general';
 import { userActions } from 'store/reducers/user';
 import { sharedQueriesProps } from 'utils/apis';
-import { UserData } from 'models/user';
+import { User, UserData } from 'models/user';
 
 export const useFetchUser = () => {
   const dispatch = useDispatch();
@@ -14,9 +14,8 @@ export const useFetchUser = () => {
     },
     queryKey: ['user'],
     onSuccess: (data) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      const res = new UserData(data);
+      const response = data as User;
+      const res = new UserData(response);
       dispatch(userActions.push(res));
     },
     ...sharedQueriesProps,
