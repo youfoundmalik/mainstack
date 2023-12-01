@@ -19,6 +19,10 @@ const Transactions = () => {
     setFilteredTxn(arr);
     setCount(count);
   };
+  const handleClear = () => {
+    setFilteredTxn(transactions);
+    setCount(0);
+  };
 
   return (
     <>
@@ -27,8 +31,14 @@ const Transactions = () => {
         setTransactions={handleFilter}
         isOpen={isOpen}
         onClose={onClose}
+        clear={handleClear}
       />
-      <TransactionTable count={count} data={filteredTxn} onOpen={onOpen} />
+      <TransactionTable
+        count={count}
+        clear={handleClear}
+        data={filteredTxn}
+        onOpen={onOpen}
+      />
     </>
   );
 };

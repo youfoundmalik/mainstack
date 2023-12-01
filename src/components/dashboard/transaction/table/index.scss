@@ -89,3 +89,47 @@
     }
   }
 }
+
+.empty-transaction-container {
+  margin: 50px auto;
+  .icon-container {
+    border-radius: 15px;
+    background: var(
+      --card-gradient-15,
+      linear-gradient(135deg, #dbdee5 1.89%, #f6f7f9 98.77%)
+    );
+    width: 48px;
+    height: 48px;
+  }
+
+  h2 {
+    color: var(--black-black-300, #131316);
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px; /* 142.857% */
+    letter-spacing: -0.6px;
+    width: 370px;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.20000000298023224px;
+    text-align: left;
+  }
+
+  .empty-button {
+    padding: 12px, 24px, 12px, 24px;
+    border-radius: 100px;
+    height: 48px;
+    color: var(--black-black-300, #131316);
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.4px;
+  }
+}
