@@ -8,6 +8,7 @@ import Transactions from 'components/dashboard/transaction';
 import { useFetchWallet } from 'hooks/useFetchWallet';
 import AppButton from 'components/shared/button';
 import { RootState } from 'store/store';
+import LineGraph from 'components/dashboard/graph';
 
 const RevenuePage = () => {
   const walletLoading = useFetchWallet();
@@ -22,7 +23,7 @@ const RevenuePage = () => {
       ) : (
         <div className='revenue-summary'>
           <div className='graph-and-balance'>
-            <div className='balance-summary flex flex-col items-start gap-2'>
+            <div className='balance-summary flex mb-3 flex-col items-start gap-2'>
               <p className='text-grey text-sm font-medium'>Available Balance</p>
               <div className='summary-balance flex  items-center gap-[65px]'>
                 <h3 className='text-[28px] font-bold text-black'>
@@ -33,7 +34,7 @@ const RevenuePage = () => {
                 </AppButton>
               </div>
             </div>
-            <div className='graph-area'>graph</div>
+            <LineGraph />
           </div>
           <div className='other-summaries flex flex-col gap-[32px]'>
             <SummaryBalance

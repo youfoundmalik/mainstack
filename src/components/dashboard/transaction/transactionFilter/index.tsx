@@ -22,6 +22,7 @@ interface Props {
   onClose: () => void;
   allTransactions: Transaction[];
   setTransactions: (txn: Transaction[], count: number) => void;
+  clear: () => void;
 }
 
 interface Filters {
@@ -34,6 +35,7 @@ const TransactionFilter = ({
   onClose,
   allTransactions,
   setTransactions,
+  clear,
 }: Props) => {
   const [filter, setFilter] = useState<Filters>({ status: [], type: [] });
   const [date, setDate] = useState({ startDate: '', endDate: '' });
@@ -59,7 +61,7 @@ const TransactionFilter = ({
   const handleClear = () => {
     setFilter({ status: [], type: [] });
     setDate({ startDate: '', endDate: '' });
-    setTransactions(allTransactions, 0);
+    clear();
   };
 
   const handleApply = () => {
