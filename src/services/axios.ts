@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 export class AxiosReqHandlers {
   static controller = new AbortController();
 
+  // A default axios instance to api url (https://fe-task-api.mainstack.io)
   static API = axios.create({
     baseURL: import.meta.env.VITE_PUBLIC_API_URL,
     timeout: 5000,
@@ -31,9 +32,11 @@ AxiosReqHandlers.API.interceptors.request.use(
 
 AxiosReqHandlers.API.interceptors.response.use(
   function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
     return response;
   },
   function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
     return Promise.reject(error);
   }
 );
