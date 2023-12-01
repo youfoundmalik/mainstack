@@ -56,33 +56,42 @@
 
   // actions style
   .app-header-actions-container {
+    .app-header-actions-user {
+      background: var(
+        --monochrome-black,
+        linear-gradient(139deg, #5c6670 2.33%, #131316 96.28%)
+      );
+      border-radius: 50%;
+      p {
+        text-align: center;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 16px;
+        letter-spacing: -0.4px;
+      }
+    }
     .custom-app-header-menu {
       .app-header-actions-user-toggle {
         padding: 4px 12px 4px 5px;
         border-radius: 100px;
         background: var(--gray-gray-50, #eff1f6);
-        .app-header-actions-user {
-          background: var(
-            --monochrome-black,
-            linear-gradient(139deg, #5c6670 2.33%, #131316 96.28%)
-          );
-          border-radius: 50%;
-          p {
-            text-align: center;
-            // font-family: Degular;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 16px;
-            letter-spacing: -0.4px;
-          }
-        }
       }
       &:hover {
         .app-header-actions-icon-btn {
           color: #f32d6a;
         }
       }
+    }
+    .custom-header-menu-options {
+      border-radius: 10px;
+      background: var(--trashed-colors-white-100, #fff);
+      box-shadow:
+        0px 6px 12px 0px rgba(92, 115, 131, 0.08),
+        0px 4px 8px 0px rgba(92, 115, 131, 0.08);
+      min-height: 100px;
+      min-width: 350px;
+      padding: 20px 15px;
     }
   }
 }
